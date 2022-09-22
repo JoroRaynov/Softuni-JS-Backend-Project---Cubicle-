@@ -8,4 +8,10 @@ exports.save = (cube) => {
     cubes.push({ id, ...cube});
 
     return fs.writeFile(path.resolve('src', 'db.json'), JSON.stringify(cubes, '', 2), { encoding: 'utf8' });
+};
+
+
+exports.getOne = (id) => {
+    const cube = cubes.find(c => c.id == id);
+    return cube;
 }
