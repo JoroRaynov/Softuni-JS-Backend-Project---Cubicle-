@@ -29,5 +29,26 @@
     "description": "TEST",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ejRiLHoD80f-EdEtLxhFY0S9EBEonLRLdA&usqp=CAU",
     "difficultyLevel": "4"
+  },
+  {
+    "id": "a08975684",
+    "name": "Cake Cube",
+    "description": "Delicious Cube :)",
+    "imageUrl": "https://static.boredpanda.com/blog/wp-content/uploads/2017/03/rubiks-cube-cake-pastry-cedric-grolet-fb.png",
+    "difficultyLevel": "6"
+  },
+  {
+    "id": "a08974484",
+    "name": "Cubchr",
+    "description": "very nice cubche",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBK-4ht1wFSlU0XQoMFPQ7jr64aUNhfQiwow&usqp=CAU",
+    "difficultyLevel": "1"
+  },
+  {
+    "id": "a08975469",
+    "name": "TEST",
+    "description": "TEST",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ejRiLHoD80f-EdEtLxhFY0S9EBEonLRLdA&usqp=CAU",
+    "difficultyLevel": "4"
   }
 ]

@@ -9,6 +9,10 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
     
     const cube = req.body;
+
+    if(cube.name.length < 2 || cube.description.length < 7 || cube.imageUrl.length == '') {
+        res.status(400).send('Invalid Request')
+    }
     try {
         await cubeService.save(cube);
      
@@ -20,11 +24,10 @@ router.post('/create', async (req, res) => {
 });
 
 router.get('/details/:id', (req, res) => {
-    // console.log(req.params);
+
    const cube = cubeService.getOne(req.params.id);
-   console.log(cube);
     res.render('details', {cube})
 
-})
+});
 
 module.exports = router;

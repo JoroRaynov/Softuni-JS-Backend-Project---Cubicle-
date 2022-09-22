@@ -1,12 +1,16 @@
 const routes = require('express').Router();
-const cubes = require('../db.json');
-
+const cubeController = require('../services/cubeService')
 routes.get('/', (req, res) => {
-    res.render('index', {cubes});
+    let { search, from, to} = req.query;
+
+    let cubes = cubeController.getAll(search, from, to);
+        res.render('index', {cubes});
 });
 
 routes.get('/about', (req, res) => {
     res.render('about');
 });
+
+
 
 module.exports = routes;

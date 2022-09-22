@@ -237,6 +237,10 @@ footer {
     font-size: 20px;
 }
 
+.empty {
+    font-size: 30px;
+    text-align: center;
+}
 /*Animations & Transitions
 */
 
