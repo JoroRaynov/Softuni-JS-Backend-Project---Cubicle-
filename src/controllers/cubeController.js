@@ -9,7 +9,6 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
 
     const cube = req.body;
-    console.log(cube);
 
     try {
         await cubeService.create(cube);
@@ -24,6 +23,7 @@ router.get('/details/:id', async (req, res) => {
 
     const cube = await cubeService.getOne(req.params.id);
     res.render('details', { cube })
+    
 
 });
 

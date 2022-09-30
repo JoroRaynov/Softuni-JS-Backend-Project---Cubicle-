@@ -23,6 +23,6 @@ const accessoriesSchema = new Schema({
 });
 
 
-const Accessory = model('Accessory');
+const Accessory = model('Accessory', accessoriesSchema);
 
 module.exports = Accessory;

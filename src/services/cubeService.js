@@ -1,6 +1,5 @@
 
 const Cube = require('../models/cubeModel');
-const { where } = require('../models/cubeModel');
 
 
 exports.getAll = async (search = '', fromInput, toInput) =>{
