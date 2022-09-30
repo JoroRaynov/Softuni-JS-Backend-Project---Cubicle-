@@ -1,27 +1,24 @@
-const cubes = require('../db.json');
-const fs = require('fs/promises');
-const path = require('path');
 
-exports.getAll = (search = '', fromInput, toInput) =>{
+const Cube = require('../models/cubeModel');
+const { where } = require('../models/cubeModel');
+
+
+exports.getAll = async (search = '', fromInput, toInput) =>{
    const from = Number(fromInput) || 0;
    const to = Number(toInput) || 6; 
-    let result = cubes
-    .filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
-    .filter(c => c.difficultyLevel >= from && c.difficultyLevel <= to);
-    return result;
+
+
+    const cubes = await Cube.find({name : {$regex: new RegExp(search, 'i')}})
+    .where('difficultyLevel').gte(from).lte(to)
+    .lean();
+    return cubes;
 }
 
-exports.save = (cube) => {
-    const id = 'a0897' + (Math.random() * 9999 | 0);
-    cubes.push({ id, ...cube});
-
-    return fs.writeFile(path.resolve('src', 'db.json'), JSON.stringify(cubes, '', 2), { encoding: 'utf8' });
+exports.create = async (cube) => {
+    await Cube.create(cube)
 };
 
 
-exports.getOne = (id) => {
-    if(cubes.length > 0) {
-        const cube = cubes.find(c => c.id == id);
-        return cube;
+exports.getOne = async (id) => {
+       return await Cube.findById(id).lean();
     }
-}
