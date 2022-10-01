@@ -9,12 +9,12 @@ router.get('/create', (req, res) => {
 
 
 router.get('/attach/:id', async (req, res) => {
-        const allAccessories = await accessoryService.getAllAccessory();
-        const cube = await cubeService.getOneCube(req.params.id);
+        const cube = await cubeService.getOneDetails(req.params.id).lean();
 
+        const accessory = await accessoryService.accessory(cube);
         res.render('attachAccessory', {
                 cube,
-                allAccessories
+                accessory
         });
 });
 
