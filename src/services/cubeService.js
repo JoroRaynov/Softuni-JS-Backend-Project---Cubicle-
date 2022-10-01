@@ -1,4 +1,3 @@
-
 const Cube = require('../models/cubeModel');
 
 

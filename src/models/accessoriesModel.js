@@ -7,7 +7,13 @@ const accessoriesSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        required: true
+        required: true,
+        validate:{
+            validator: function(){
+                return this.imageUrl.startsWith('http');
+            },
+            message: 'Image url should be a link'
+        } 
     },
     description: {
         type: String,
