@@ -23,8 +23,23 @@ router.get('/login',  (req, res) => {
     res.render('login');
 });
 
-router.post('/login', (req, res) => {
-    console.log(req.body);
+router.post('/login', async (req, res) => {
+    const token1 = await userService.login(req.body);
+    console.log(token1);
+   try{
+    const token = await userService.login(req.body);
+    if(!token){
+       return res.redirect('404')
+    }
+    console.log(token);
+    res.cookie('session', token, {httpOnly:true});
+    res.redirect('/');
+
+   } catch(err){
+  
+
+    res.status(404).render('404')
+   }
 });
 
 
