@@ -16,6 +16,7 @@ router.get('/attach/:id', async (req, res) => {
                 cube,
                 accessory
         });
+        console.log(accessory);
 });
 
 router.post('/create', async (req, res) => {
