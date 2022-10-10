@@ -31,7 +31,10 @@ const cubeSchema = new Schema({
             type: Types.ObjectId,
             ref: 'Accessory'
         }
-    ]
+    ],
+    owner: {
+        type: Types.ObjectId
+    }
 });
 
 

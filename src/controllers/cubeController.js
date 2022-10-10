@@ -9,9 +9,9 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
 
     const cube = req.body;
-
+    cube.owner = req.user.id;
     try {
-        await cubeService.create(cube);
+        const createdCube = await cubeService.create(cube, req.user.id);
 
     } catch (err) {
         res.status(400).send(err.message)
@@ -23,8 +23,8 @@ router.get('/details/:id', async (req, res) => {
 
     const cube = await cubeService.getOneDetails(req.params.id).lean();
 
-    res.render('details', { cube})
-    
+    res.render('details', { cube })
+
 });
 
 module.exports = router;

@@ -13,9 +13,7 @@ exports.getAll = async (search = '', fromInput, toInput) => {
     return cubes;
 }
 
-exports.create = async (cube) => {
-    await Cube.create(cube)
-};
+exports.create = (cube) => Cube.create(cube);
 
 
 exports.getOneCube = async (id) => {

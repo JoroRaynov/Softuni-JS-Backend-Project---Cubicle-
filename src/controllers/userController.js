@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/UserModel');
-const bcrypt = require('bcrypt');
 const userService = require('../services/userService');
-const cubeService = require('../services/cubeService');
 
 
 router.get('/register', (req, res) => {
@@ -24,14 +22,11 @@ router.get('/login',  (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const token1 = await userService.login(req.body);
-    console.log(token1);
    try{
     const token = await userService.login(req.body);
     if(!token){
        return res.redirect('404')
     }
-    console.log(token);
     res.cookie('session', token, {httpOnly:true});
     res.redirect('/');
 
