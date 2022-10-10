@@ -22,19 +22,18 @@ router.get('/login',  (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-   try{
+   
     const token = await userService.login(req.body);
-    if(!token){
-       return res.redirect('404')
-    }
+   
+ 
     res.cookie('session', token, {httpOnly:true});
     res.redirect('/');
 
-   } catch(err){
+
   
 
-    res.status(404).render('404')
-   }
+   //  res.status(404).render('404')
+   
 });
 
 

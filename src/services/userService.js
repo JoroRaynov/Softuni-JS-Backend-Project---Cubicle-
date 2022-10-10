@@ -2,7 +2,7 @@ const User = require('../models/UserModel');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-const secret = require('../constants');
+const {secret} = require('../constants');
 
 
 exports.register = async ({ username, password, repeatPassword }) => {
@@ -24,6 +24,7 @@ exports.login = async ({ username, password }) => {
     }
 
     const isValid = await bcrypt.compare(password, user.password);
+    
 
     if(!isValid) {
         throw { message: `Invalid username or password`}
