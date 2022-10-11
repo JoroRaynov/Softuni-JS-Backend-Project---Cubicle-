@@ -1,8 +1,8 @@
 const User = require('../models/UserModel');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const { saltRounds } = require('../constants')
 const jwt = require('jsonwebtoken');
-const {secret} = require('../constants');
+const { secret } = require('../constants');
 
 
 exports.register = async ({ username, password, repeatPassword }) => {
@@ -20,20 +20,20 @@ exports.login = async ({ username, password }) => {
 
     const user = await User.findOne({ username });
     if (!user) {
-        throw { message: `There is no registered user with this username ${username}`};
+        throw { message: `There is no registered user with this username ${username}` };
     }
 
     const isValid = await bcrypt.compare(password, user.password);
-    
 
-    if(!isValid) {
-        throw { message: `Invalid username or password`}
+
+    if (!isValid) {
+        throw { message: `Invalid username or password` }
     }
 
     let result = new Promise((resolve, reject) => {
 
-        jwt.sign({id: user._id, username: user.username},secret, {expiresIn: '2d'}, (err, token)=>{
-            if(err){
+        jwt.sign({ id: user._id, username: user.username }, secret, { expiresIn: '2d' }, (err, token) => {
+            if (err) {
                 return reject(err)
             }
             resolve(token);

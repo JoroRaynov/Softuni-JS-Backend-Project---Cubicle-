@@ -9,8 +9,7 @@ router.get('/create', (req, res) => {
         res.render('createAccessory');
 })
 
-
-router.get('/attach/:id', async (req, res) => {
+router.get('/:id/attach', isAuthenticated, async (req, res) => {
         const cube = await cubeService.getOneDetails(req.params.id).lean();
 
         const accessory = await accessoryService.accessory(cube);

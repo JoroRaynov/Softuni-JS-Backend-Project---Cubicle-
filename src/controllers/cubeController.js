@@ -11,7 +11,7 @@ router.post('/create', isAuthenticated, async (req, res) => {
     const cube = req.body;
     cube.owner = req.user.id;
     try {
-        const createdCube = await cubeService.create(cube, req.user.id);
+       await cubeService.create(cube, req.user.id);
 
     } catch (err) {
         res.status(400).send(err.message)
@@ -22,9 +22,15 @@ router.post('/create', isAuthenticated, async (req, res) => {
 router.get('/details/:id', async (req, res) => {
 
     const cube = await cubeService.getOneDetails(req.params.id).lean();
-
-    res.render('details', { cube })
+    console.log(req.user.id);
+    console.log(cube.owner);
+    const isOwner = cube.owner == req.user.id;
+    res.render('details', { cube, isOwner })
 
 });
+
+router.get('/:id/edit', isAuthenticated,(req, res) => {
+    res.render('edit');
+})
 
 module.exports = router;
