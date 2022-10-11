@@ -17,7 +17,6 @@ router.get('/:id/attach', isAuthenticated, async (req, res) => {
                 cube,
                 accessory
         });
-        console.log(accessory);
 });
 
 router.post('/create', isAuthenticated, async (req, res) => {

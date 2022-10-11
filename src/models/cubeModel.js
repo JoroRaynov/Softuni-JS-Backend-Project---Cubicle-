@@ -13,12 +13,12 @@ const cubeSchema = new Schema({
     imageUrl: {
         type: String,
         required: true,
-        validate: {
-            validator: function () {
-                return this.imageUrl.startsWith('http');
-            },
-            message: 'Image url should be a link'
-        }
+        // validate: {
+        //     validator: function () {
+        //         return this.imageUrl.startsWith('http');
+        //     },
+        //     message: 'Image url should be a link'
+        // }
     },
     difficultyLevel: {
         type: Number,
@@ -36,7 +36,9 @@ const cubeSchema = new Schema({
         type: Types.ObjectId
     }
 });
-
+cubeSchema.path('imageUrl').validate(function() {
+    return this.imageUrl.startsWith('http');
+}, 'Image url should be a link');
 
 const Cube = model('Cube', cubeSchema);
 

@@ -13,17 +13,19 @@ exports.getAll = async (search = '', fromInput, toInput) => {
     return cubes;
 }
 
-exports.create = (cube) => Cube.create(cube);
+exports.create = (cubeId) => Cube.create(cubeId);
 
+exports.edit =  (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
 
-exports.getOneCube = async (id) => {
-    return await Cube.findById(id).lean();
-}
+exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId)
+
+exports.getOneCube = (cubeId) => Cube.findById(cubeId).lean();
+
 
 exports.attachAccessory = async (cubeId, accessoryId) => {
     const cube = await Cube.findById(cubeId);
     const accessory = await accessoryService.getOneAccessory(accessoryId);
-   
+
     cube.accessories.push(accessory);
     accessory.cubes.push(cube);
 

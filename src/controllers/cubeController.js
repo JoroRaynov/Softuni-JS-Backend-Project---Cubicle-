@@ -11,7 +11,7 @@ router.post('/create', isAuthenticated, async (req, res) => {
     const cube = req.body;
     cube.owner = req.user.id;
     try {
-       await cubeService.create(cube, req.user.id);
+        await cubeService.create(cube, req.user.id);
 
     } catch (err) {
         res.status(400).send(err.message)
@@ -22,15 +22,34 @@ router.post('/create', isAuthenticated, async (req, res) => {
 router.get('/details/:id', async (req, res) => {
 
     const cube = await cubeService.getOneDetails(req.params.id).lean();
-    console.log(req.user.id);
-    console.log(cube.owner);
     const isOwner = cube.owner == req.user.id;
     res.render('details', { cube, isOwner })
 
 });
 
-router.get('/:id/edit', isAuthenticated,(req, res) => {
-    res.render('edit');
-})
+router.get('/:id/edit', isAuthenticated, async (req, res) => {
+    const cube = await cubeService.getOneCube(req.params.id);
+
+    res.render('edit', { cube });
+});
+
+router.post('/:id/edit', isAuthenticated, async (req, res) => {
+   
+    const modifiedCube = await cubeService.edit(req.params.id, req.body);
+    console.log(modifiedCube);
+    res.redirect(`/cube/details/${req.params.id}`);
+});
+
+router.get('/:id/delete', isAuthenticated, async (req, res) => {
+    const cube = await cubeService.getOneCube(req.params.id);
+    res.render('delete', { cube });
+});
+
+
+router.post('/:id/delete', isAuthenticated, async (req, res) => {
+   await cubeService.delete(req.params.id);
+
+   res.render('/')
+});
 
 module.exports = router;
