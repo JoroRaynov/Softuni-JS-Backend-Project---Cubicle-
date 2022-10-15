@@ -17,7 +17,7 @@ exports.create = (cubeId) => Cube.create(cubeId);
 
 exports.edit =  (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
 
-exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId)
+exports.delete = (cubeId) => Cube.findByIdAndDelete({_id: cubeId});
 
 exports.getOneCube = (cubeId) => Cube.findById(cubeId).lean();
 
