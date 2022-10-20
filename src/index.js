@@ -8,8 +8,8 @@ const { auth } = require('./middlewares/authMiddleware');
 
 async function start() {
 
-    await databaseConfig();
     const app = express();
+    await databaseConfig();
 
     expressConfig(app);
 
